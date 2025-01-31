@@ -46,7 +46,7 @@ public static void main(String[] args) {
             System.out.println("LINKED LIST CREATED");
             System.out.println("LINKED LIST BEFORE INSERTING");
             list.displayList();
-            System.out.println("ENTER THE POSITON WHERE YOU WANT TO INSERT");
+            System.out.println("ENTER THE POSIITON WHERE YOU WANT TO INSERT");
             if(sc.hasNextInt())
             {
             pos=sc.nextInt();
@@ -55,6 +55,7 @@ public static void main(String[] args) {
             {
             data1=sc.nextInt();
             list.insertMiddle(data1,pos);
+            System.out.println("ELEMENT INSERTED");
             System.out.println("LINKED LIST AFTER INSERTING");
             list.displayList();
             }
@@ -72,17 +73,46 @@ public static void main(String[] args) {
            }
         }
     }
-public void insertMiddle() 
-    {    
-//TYPE YOUR CODE HERE
-    }
+public void insertMiddle(int data, int pos) {
+        
+        
+        Node newNode = new Node(data);
 
-public void displayList() {
-        Node current = head;
-        while (current != null) {
-        System.out.print(current.data + " -> ");
-        current = current.next;
+        // If inserting at the beginning
+        if (pos == 1) {
+            newNode.next = head;
+            head = newNode;
+            return;
         }
-System.out.println("null");
+
+        // Traverse to the node just before the insertion point
+        Node current = head;
+        int currentPos = 1;
+        
+        while (current != null && currentPos < pos - 1) {
+            current = current.next;
+            currentPos++;
+        }
+
+        // If current is null, the position is out of bounds
+        if (current == null) {
+            System.out.println("Position out of bounds.");
+            return;
+        }
+
+        // Insert the new node at the desired position
+        newNode.next = current.next;
+        current.next = newNode;
     }
+public void displayList() {
+Node current = head;
+while (current != null) {
+System.out.print(current.data);
+current = current.next;
+}
+
+
+
+System.out.println("null");
+}
 }
